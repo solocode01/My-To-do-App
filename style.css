@@ -126,6 +126,8 @@ body {
 .response-check {
   display: flex;
   align-items: center;
+  /* align-items: flex-start; */
+  line-height: 1.3;
 }
 
 .checkbox {
@@ -133,6 +135,7 @@ body {
   -webkit-appearance: none;
   width: 2.4rem;
   height: 2.4rem;
+  flex-shrink: 0;
   border: 2px solid #999;
   border-radius: 50%;
   cursor: pointer;
@@ -160,6 +163,7 @@ body {
 
 .response-text {
   font-size: 1.6rem;
+  padding-right: 1rem;
 }
 
 .response.completed {
