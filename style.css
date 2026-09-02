@@ -56,12 +56,12 @@ body {
   display: flex;
   align-items: center;
   font-family: Nunito;
-
   position: relative;
 }
 
 .input-box {
-  width: 34rem;
+  width: 100%;
+  min-width: 0;
   padding: 1.4rem 12rem 1.4rem 3.2rem;
   border-radius: 30px;
   border: none;
