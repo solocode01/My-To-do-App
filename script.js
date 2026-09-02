@@ -1,25 +1,11 @@
 "use strict";
 
-// INSTRUCTION (STEPS)
-
-// 1. (i) User clicks "Add" after typing in the input box
-// (ii) After clicking, text is added below the input box
-
-// 2. User click the checkbox, text marks as read, by a line through and an opacity of 0.5
-
-// 3. (i) User clicks the edit button, takes text back to input and edit
-// (ii) User click "add" to add to the other to-do lists
-
-// 4. User clicks the delete button, which takes off the to-do list entirely off the page.
-
-// 5. Use localStorage to keep items on page even after reloading
-
-////////////////////////////////////////
-///////////////////////////////////////
-
 const addButton = document.querySelector(".add-btn");
 const responses = document.querySelector(".responses");
 const inputBox = document.querySelector(".input-box");
+const progressBar = document.querySelector(".progress");
+const progressNumbers = document.querySelector(".numbers");
+const celebrateText = document.querySelector(".detail-header");
 
 // The single source of truth for all tasks
 let tasks = [];
@@ -59,16 +45,32 @@ function renderTasks() {
   });
 }
 
+const updateProgress = () => {
+  const total = tasks.length;
+  const completed = tasks.filter((task) => task.completed).length;
+  progressNumbers.textContent = `${completed}/${total}`;
+  const percent = total === 0 ? 0 : (completed / total) * 100;
+  progressBar.style.width = `${percent}%`;
+
+  if (completed && total > 0 && completed === total) {
+    celebrate();
+    celebrateText.textContent = `Yes, you did it!!! 💯🥰`;
+  } else {
+    celebrateText.textContent = "Keep it Up! 💪";
+  }
+};
+
 // Add a new task
 addButton.addEventListener("click", function (e) {
   e.preventDefault();
 
   const taskText = inputBox.value.trim();
-  if (!taskText) return;
+  if (!taskText) "";
 
   tasks.push({ text: taskText, completed: false });
   saveTasks();
   renderTasks();
+  updateProgress();
   inputBox.value = "";
 });
 
@@ -83,6 +85,7 @@ responses.addEventListener("click", function (e) {
     tasks[index].completed = !tasks[index].completed;
     saveTasks();
     renderTasks();
+    updateProgress();
   }
 
   if (e.target.closest(".edit-btn")) {
@@ -90,17 +93,53 @@ responses.addEventListener("click", function (e) {
     tasks.splice(index, 1);
     saveTasks();
     renderTasks();
+    updateProgress();
   }
 
   if (e.target.closest(".delete-btn")) {
     tasks.splice(index, 1);
     saveTasks();
     renderTasks();
+    updateProgress();
   }
 });
 
+const celebrate = () => {
+  const count = 200,
+    defaults = { origin: { y: 0.7 } };
+
+  function fire(particleRatio, opts) {
+    confetti(
+      Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio),
+      }),
+    );
+  }
+  fire(0.25, {
+    spread: 26,
+    startVelocity: 55,
+  });
+  fire(0.2, { spread: 60 });
+  fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8,
+  });
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.2,
+  });
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 45,
+  });
+};
+
 // Draw whatever was loaded from localStorage as soon as the page opens
 renderTasks();
+updateProgress();
 
 // const addButton = document.querySelector(".add-btn");
 // const responses = document.querySelector(".responses");
