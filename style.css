@@ -34,8 +34,8 @@ body {
   max-height: 70%;
   overflow: hidden;
   background-color: #fff;
-  border-radius: 10px;
-  padding: 3.2rem;
+  border-radius: 12px;
+  padding: 4rem 3.2rem;
   margin: 1.2rem;
 }
 
@@ -64,6 +64,10 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+}
+
+.hidden {
+  display: none;
 }
 
 .details {
@@ -164,6 +168,18 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(245, 233, 172, 0.8);
 }
 
+.preload-img {
+  margin: 1rem 0;
+}
+
+.svg-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20rem;
+  height: 20rem;
+}
+
 .responses {
   flex: 1;
   min-height: 0;
@@ -262,4 +278,34 @@ button {
 .delete-icon {
   background-color: #555;
   color: #fff;
+}
+
+/*********************************/
+/* MEDIA QUERIES FOR SMARTPHONES */
+/* Size used: 400px */
+/*********************************/
+
+@media (max-width: 25em) {
+  html {
+    font-size: 56.25%;
+    scroll-behavior: smooth;
+  }
+
+  .main {
+    margin: 2.2rem;
+  }
+
+  .task-tracker {
+    width: 100%;
+    padding: 1.4rem 2rem;
+  }
+
+  .details {
+    gap: 1.8rem;
+  }
+
+  .numbers {
+    width: 8rem;
+    height: 8rem;
+  }
 }

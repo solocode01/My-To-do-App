@@ -6,6 +6,8 @@ const inputBox = document.querySelector(".input-box");
 const progressBar = document.querySelector(".progress");
 const progressNumbers = document.querySelector(".numbers");
 const celebrateText = document.querySelector(".detail-header");
+const taskTracker = document.querySelector(".task-tracker");
+const preloadImg = document.querySelector(".preload-img");
 
 // The single source of truth for all tasks
 let tasks = [];
@@ -51,6 +53,14 @@ const updateProgress = () => {
   progressNumbers.textContent = `${completed}/${total}`;
   const percent = total === 0 ? 0 : (completed / total) * 100;
   progressBar.style.width = `${percent}%`;
+
+  total > 0
+    ? taskTracker.classList.remove("hidden")
+    : taskTracker.classList.add("hidden");
+
+  total > 0
+    ? preloadImg.classList.add("hidden")
+    : preloadImg.classList.remove("hidden");
 
   if (completed && total > 0 && completed === total) {
     celebrate();
