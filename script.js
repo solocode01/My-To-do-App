@@ -9,6 +9,7 @@ const celebrateText = document.querySelector(".detail-header");
 const taskTracker = document.querySelector(".task-tracker");
 const preloadImg = document.querySelector(".preload-img");
 
+// inputBox.focus();
 // The single source of truth for all tasks
 let tasks = [];
 
@@ -75,7 +76,7 @@ addButton.addEventListener("click", function (e) {
   e.preventDefault();
 
   const taskText = inputBox.value.trim();
-  if (!taskText) "";
+  if (!taskText) return;
 
   tasks.push({ text: taskText, completed: false });
   saveTasks();

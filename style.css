@@ -97,7 +97,7 @@ body {
   height: 100%;
   background-color: #523708;
   border-radius: 2rem;
-  transform: width 0.3s ease;
+  transition: width 0.3s ease;
 
   /* position: absolute; */
 }
